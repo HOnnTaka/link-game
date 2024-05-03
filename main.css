@@ -4,7 +4,14 @@
   border: 0;
   transition: all 0.3s ease;
 }
-
+/* 行列变量，在js修改即可,自动在body插入行内样式 */
+:root {
+  --row: 6;
+  --col: 6;
+  /* row和col最小值 */
+  --max: max(var(--row), var(--col));
+  --min: min(var(--row), var(--col));
+}
 body {
   /*火狐*/
   -webkit-user-select: none;
@@ -111,23 +118,26 @@ body {
 .wrapper .game-box .game-area {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - min(85px, 11.5vw));
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
+  /* padding: 40px 0; */
 }
 
 .wrapper .game-box .game-area table#game {
+  position: absolute;
   border-spacing: 0;
   border-collapse: collapse;
   margin-bottom: 11.5vw;
 }
 .wrapper .game-box .game-area table#game tr {
-  height: calc(100vmin / 6);
+  height: calc(100vmin / var(--max));
   display: flex;
 }
 .wrapper .game-box .game-area table#game .game-row td {
-  width: calc(100vmin / 6);
+  width: calc(100vmin / var(--max));
   text-align: center;
   vertical-align: middle;
   display: flex;
@@ -158,25 +168,28 @@ body {
 .wrapper .game-box .game-area #canvas {
   position: absolute;
   pointer-events: none;
-  height: calc(calc(100vmin));
-  width: calc(calc(100vmin));
-
+  height: calc(calc(100vmin) / var(--max) * var(--row));
+  width: calc(calc(100vmin) / var(--max) * var(--col));
   margin-bottom: 11.5vw;
 }
 /* 横屏 */
 @media screen and (orientation: landscape) {
   .wrapper .game-box .game-area table#game {
-    height: 100%;
-    margin: 0;
+    margin-bottom: unset;
   }
   .wrapper .game-box .game-area table#game tr {
-    height: calc(calc(100vmin - 85px) / 6);
+    height: calc(calc(100vmin - min(85px, 11.5vw)) / var(--min));
   }
   .wrapper .game-box .game-area table#game .game-row td {
-    width: calc(calc(100vmin - 85px) / 6);
+    width: calc(calc(100vmin - min(85px, 11.5vw)) / var(--min));
   }
   .wrapper .game-box .game-area #canvas {
-    width: calc(calc(100vmin - 85px));
+    /* height: calc(
+      calc(calc(100vmin - min(85px, 11.5vw)) / var(--min) * var(--row))
+    );
+    width: calc(
+      calc(calc(100vmin - min(85px, 11.5vw)) / var(--min) * var(--col))
+    ); */
     margin-bottom: unset;
   }
 }

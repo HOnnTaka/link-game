@@ -81,6 +81,18 @@ function LinkGame(config) {
 
 LinkGame.prototype = {
   init: function (isReset) {
+    // 在body中插入变量
+    document.body.style.setProperty("--row", this.rows - 2);
+    document.body.style.setProperty("--col", this.cols - 2);
+    document.body.style.setProperty(
+      "--min",
+      Math.min(this.rows, this.cols) - 2
+    );
+    document.body.style.setProperty(
+      "--max",
+      Math.max(this.rows, this.cols) - 2
+    );
+
     var self = this;
     this.stack = [];
     this.iconTypeCount = this.level + 11; // 图片的种类
@@ -367,9 +379,8 @@ LinkGame.prototype = {
   // 连线
   drawLine: function (callback) {
     const $canvas = $("#canvas");
-    $canvas[0].width = $canvas[0].offsetWidth;
-    $canvas[0].height = $canvas[0].offsetHeight;
-    const size = $canvas[0].width / 6;
+    resizeCanvas();
+    const size = $canvas[0].offsetWidth / (this.cols - 2);
     if (!$canvas[0].getContext("2d")) return; // 不支持Canvas
     var linkList = this.linkPictures;
     var coordinate = [];
@@ -661,12 +672,7 @@ LinkGame.prototype = {
 
 $(function () {
   const $canvas = $("#canvas");
-  $canvas[0].width = $canvas[0].offsetWidth;
-  $canvas[0].height = $canvas[0].offsetHeight;
-  window.onresize = function () {
-    $canvas[0].width = $canvas[0].offsetWidth;
-    $canvas[0].height = $canvas[0].offsetHeight;
-  };
+
   $(".start-btn").click(function () {
     $("audio").get(0).play();
     $(".init-box").addClass("hidden");
@@ -679,5 +685,20 @@ $(function () {
       level: 0,
     };
     new LinkGame(gameConfig).init();
+    resizeCanvas();
   });
 });
+
+let timmer = null;
+window.onresize = function () {
+  clearTimeout(timmer);
+  timmer = setTimeout(resizeCanvas, 200);
+};
+
+const resizeCanvas = () => {
+  const $canvas = $("#canvas");
+  $canvas[0].style.width = $("#game")[0].getBoundingClientRect().width + "px";
+  $canvas[0].style.height = $("#game")[0].getBoundingClientRect().height + "px";
+  $canvas[0].width = $canvas[0].offsetWidth;
+  $canvas[0].height = $canvas[0].offsetHeight;
+};
