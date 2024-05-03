@@ -681,7 +681,7 @@ $(function () {
       cellWidth: 60,
       cellHeight: 60,
       rows: 6,
-      cols: 6,
+      cols: 8,
       level: 0,
     };
     new LinkGame(gameConfig).init();
