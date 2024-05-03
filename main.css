@@ -122,7 +122,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: auto;
+  overflow: hidden;
   /* padding: 40px 0; */
 }
 
@@ -133,11 +133,11 @@ body {
   margin-bottom: 11.5vw;
 }
 .wrapper .game-box .game-area table#game tr {
-  height: calc(100vmin / var(--max));
+  height: calc(90vmin / var(--max));
   display: flex;
 }
 .wrapper .game-box .game-area table#game .game-row td {
-  width: calc(100vmin / var(--max));
+  width: calc(90vmin / var(--max));
   text-align: center;
   vertical-align: middle;
   display: flex;
@@ -147,8 +147,8 @@ body {
 
 .wrapper .game-box .game-area table#game .game-row td .pic-box {
   display: flex;
-  width: 75%;
-  height: 75%;
+  width: 90%;
+  height: 90%;
   cursor: pointer;
   background: url("images/pic-bg.png") center no-repeat;
   background-size: contain;
@@ -168,8 +168,8 @@ body {
 .wrapper .game-box .game-area #canvas {
   position: absolute;
   pointer-events: none;
-  height: calc(calc(100vmin) / var(--max) * var(--row));
-  width: calc(calc(100vmin) / var(--max) * var(--col));
+  height: calc(calc(90vmin) / var(--max) * var(--row));
+  width: calc(calc(90vmin) / var(--max) * var(--col));
   margin-bottom: 11.5vw;
 }
 /* 横屏 */
@@ -178,17 +178,17 @@ body {
     margin-bottom: unset;
   }
   .wrapper .game-box .game-area table#game tr {
-    height: calc(calc(100vmin - min(85px, 11.5vw)) / var(--min));
+    height: calc(calc(90vmin - min(85px, 11.5vw)) / var(--min));
   }
   .wrapper .game-box .game-area table#game .game-row td {
-    width: calc(calc(100vmin - min(85px, 11.5vw)) / var(--min));
+    width: calc(calc(90vmin - min(85px, 11.5vw)) / var(--min));
   }
   .wrapper .game-box .game-area #canvas {
     /* height: calc(
-      calc(calc(100vmin - min(85px, 11.5vw)) / var(--min) * var(--row))
+      calc(calc(90vmin - min(85px, 11.5vw)) / var(--min) * var(--row))
     );
     width: calc(
-      calc(calc(100vmin - min(85px, 11.5vw)) / var(--min) * var(--col))
+      calc(calc(90vmin - min(85px, 11.5vw)) / var(--min) * var(--col))
     ); */
     margin-bottom: unset;
   }

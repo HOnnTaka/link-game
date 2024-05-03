@@ -695,10 +695,12 @@ window.onresize = function () {
   timmer = setTimeout(resizeCanvas, 200);
 };
 
-const resizeCanvas = () => {
+const resizeCanvas = (padding = 0) => {
   const $canvas = $("#canvas");
-  $canvas[0].style.width = $("#game")[0].getBoundingClientRect().width + "px";
-  $canvas[0].style.height = $("#game")[0].getBoundingClientRect().height + "px";
+  $canvas[0].style.width =
+    $("#game")[0].getBoundingClientRect().width + padding + "px";
+  $canvas[0].style.height =
+    $("#game")[0].getBoundingClientRect().height + padding + "px";
   $canvas[0].width = $canvas[0].offsetWidth;
   $canvas[0].height = $canvas[0].offsetHeight;
 };
